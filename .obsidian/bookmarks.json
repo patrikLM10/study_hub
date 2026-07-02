@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "type": "group",
+      "ctime": 1782463600331,
+      "items": [
+        {
+          "type": "file",
+          "ctime": 1782454364176,
+          "path": "Master_Notes.md",
+          "title": "Random variable"
+        }
+      ],
+      "title": "Analog Digital communication"
+    },
+    {
+      "type": "folder",
+      "ctime": 1782486902013,
+      "path": "AD-communication/Clean_Random process",
+      "title": "Random process"
+    }
+  ]
+}
