@@ -1,0 +1,128 @@
+{
+  "note_title": "Random Variable - Complete Guide",
+  "note_slug": "random-variable-complete-guide",
+  "folder_path": "Subjects/Communication/Random variable/",
+  "tags": ["random-variable", "probability", "gate-ece", "communication"],
+  "content": "Comprehensive notes on Random Variables including PMF, PDF, CDF, joint distributions, expectation, variance, covariance, correlation, and standard distributions.\n\n## Key Definitions\n\n- **Random Experiment**: A setup where you know all possible outcomes but can't predict the exact outcome before it happens. E.g., tossing a fair coin $\\rightarrow \\{H, T\\}$.\n- **Sample Space**: List of all possible outcomes. For two coins: $S = \\{HH, HT, TH, TT\\}$.\n- **Random Variable**: A function that assigns a real number to each sample point.\n\n## Types of Random Variables\n\n- **Discrete (DRV)**: $x \\in \\{0, 1, 2\\}$ — countable values\n- **Continuous (CRV)**: $x \\in [30, 60]$ — uncountable interval\n- **Mixed**: $x \\in \\{1, 2\\} + [3, 6]$ — both discrete and continuous parts\n\nFor CRV: $P(X = a) = 0$ — probability at a single point is zero.\n\n## Probability Functions\n\n### PMF (Probability Mass Function)\n$$p_X(x) = P(X = x)$$\nFor DRV only. Example: 3 coins tossed, $X =$ number of heads:\n$$P(X=0) = \\frac{1}{8}, \\quad P(X=1) = \\frac{3}{8}, \\quad P(X=2) = \\frac{3}{8}, \\quad P(X=3) = \\frac{1}{8}$$\n\n### PDF (Probability Density Function)\n$$\\int_{-\\infty}^{\\infty} f_X(x) \\, dx = 1, \\quad f_X(x) \\ge 0$$\n\n### CDF (Cumulative Distribution Function)\n$$F_X(x) = P(X \\le x)$$\nProperties:\n- $F_X(\\infty) = 1$, $F_X(-\\infty) = 0$\n- Non-decreasing: $x_2 > x_1 \\Rightarrow F_X(x_2) \\ge F_X(x_1)$\n- Right-continuous: $F_X(a^+) = F_X(a)$\n\n### PDF-CDF Relation\n$$f_X(x) = \\frac{d}{dx} F_X(x), \\qquad F_X(x) = \\int_{-\\infty}^{x} f_X(t) \\, dt$$\n\n## Probability from CDF\n\n$$P(a < X \\le b) = F_X(b) - F_X(a) = F_X(b^+) - F_X(a^+)$$\n$$P(X = a) = F_X(a) - F_X(a^-) = F_X(a^+) - F_X(a^-)$$\n\nFor CRV:\n$$P(a < X \\le b) = P(a \\le X < b) = P(a < X < b) = P(a \\le X \\le b) = F_X(b) - F_X(a)$$\n\n## Conditional Probability\n\n$$P\\left(\\frac{A}{B}\\right) = \\frac{P(A \\cap B)}{P(B)}$$\n\nIf A and B are independent:\n$$P(A \\cap B) = P(A) \\cdot P(B)$$\n\n## Expectation\n\n**DRV:** $$E[X] = \\sum_i x_i \\, P(X = x_i)$$\n\n**CRV:** $$E[X] = \\int_{-\\infty}^{\\infty} x \\, f_X(x) \\, dx$$\n\n**Properties:**\n- $E[aX + b] = aE[X] + b$\n- $E[c] = c$\n- $E[g(X)] = \\int_{-\\infty}^{\\infty} g(x) f_X(x) \\, dx$\n\n## Moments\n\n- **1st order (Mean):** $\\mu_x = E[X]$\n- **2nd order (MSV):** $E[X^2]$\n- **$n$th order:** $E[X^n]$\n\n## Variance\n\n$$\\sigma_x^2 = E[(X - \\mu_x)^2] = E[X^2] - (E[X])^2$$\n\n**Total power = DC power + AC power:**\n$$E[X^2] = \\mu_x^2 + \\sigma_x^2$$\n\n**Linear transformation:** If $Y = aX + b$, then:\n$$\\mu_Y = a\\mu_X + b, \\qquad \\sigma_Y^2 = a^2 \\sigma_X^2$$\n\n## Joint Distributions\n\n**Joint CDF:** $$F_{XY}(x, y) = P(X \\le x, Y \\le y)$$\n\n**Marginal CDF:** $$F_X(x) = F_{XY}(x, \\infty)$$\n\n**Joint PDF:** $$f_{XY}(x, y) = \\frac{\\partial^2}{\\partial x \\partial y} F_{XY}(x, y)$$\n\n**Marginal PDF:** $$f_X(x) = \\int_{-\\infty}^{\\infty} f_{XY}(x, y) \\, dy$$\n\n**Independence:** $X$ and $Y$ are independent iff:\n$$F_{XY}(x, y) = F_X(x) \\cdot F_Y(y) \\quad \\text{or} \\quad f_{XY}(x, y) = f_X(x) \\cdot f_Y(y)$$\n\n## Covariance and Correlation\n\n**Covariance:** $$\\sigma_{xy} = \\text{Cov}(X, Y) = E[XY] - E[X]E[Y]$$\n\n**Correlation coefficient:** $$\\rho_{xy} = \\frac{\\text{Cov}(X, Y)}{\\sigma_X \\sigma_Y}, \\quad -1 \\le \\rho_{xy} \\le 1$$\n\n- **Uncorrelated:** $\\rho_{xy} = 0 \\Rightarrow E[XY] = E[X]E[Y]$\n- **Orthogonal:** $E[XY] = 0$\n- **Independent $\\Rightarrow$ Uncorrelated** (converse not always true)\n\n## Standard Distributions\n\n### Uniform $U[a, b]$\n$$f_X(x) = \\frac{1}{b-a}, \\quad a \\le x \\le b$$\n$$\\mu = \\frac{a+b}{2}, \\quad \\sigma^2 = \\frac{(b-a)^2}{12}$$\n\n### Gaussian (Normal) $N(\\mu, \\sigma^2)$\n$$f_X(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} \\exp\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)$$\n\n### Q-Function\n$$Q(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_z^{\\infty} e^{-t^2/2} \\, dt$$\n$$P(X > a) = Q\\left(\\frac{a - \\mu}{\\sigma}\\right) \\quad \\text{for } X \\sim N(\\mu, \\sigma^2)$$",
+  "flashcards": [
+    {"question": "What is a random variable?", "answer": "A function that assigns a real number to each sample point.", "difficulty": "easy"},
+    {"question": "What is the difference between DRV and CRV?", "answer": "DRV takes countable distinct values. CRV takes uncountable values over an interval. For CRV, $P(X = a) = 0$.", "difficulty": "medium"},
+    {"question": "What is PMF?", "answer": "Probability Mass Function: $p_X(x) = P(X = x)$ for discrete random variables.", "difficulty": "easy"},
+    {"question": "What is PDF?", "answer": "Probability Density Function: $f_X(x) \\ge 0$, $\\int_{-\\infty}^{\\infty} f_X(x) \\, dx = 1$.", "difficulty": "easy"},
+    {"question": "What is CDF?", "answer": "Cumulative Distribution Function: $F_X(x) = P(X \\le x)$. It ranges from 0 to 1 and is non-decreasing.", "difficulty": "easy"},
+    {"question": "What is the relationship between PDF and CDF?", "answer": "$f_X(x) = \\frac{d}{dx} F_X(x)$ and $F_X(x) = \\int_{-\\infty}^{x} f_X(t) \\, dt$.", "difficulty": "medium"},
+    {"question": "What are the properties of CDF?", "answer": "1) $F_X(\\infty) = 1$, 2) $F_X(-\\infty) = 0$, 3) Non-decreasing, 4) Right-continuous: $F_X(a^+) = F_X(a)$.", "difficulty": "medium"},
+    {"question": "How do you find $P(X = a)$ from CDF?", "answer": "$P(X = a) = F_X(a) - F_X(a^-) = F_X(a^+) - F_X(a^-)$. For CRV, $P(X = a) = 0$.", "difficulty": "medium"},
+    {"question": "How do you calculate $P(a < X \\le b)$ using CDF?", "answer": "$P(a < X \\le b) = F_X(b) - F_X(a) = F_X(b^+) - F_X(a^+)$.", "difficulty": "medium"},
+    {"question": "What is conditional probability?", "answer": "$P(A|B) = \\frac{P(A \\cap B)}{P(B)}$, where $P(B) > 0$.", "difficulty": "easy"},
+    {"question": "What does it mean for events A and B to be independent?", "answer": "$P(A \\cap B) = P(A) \\cdot P(B)$, or equivalently $P(A|B) = P(A)$.", "difficulty": "easy"},
+    {"question": "What is $E[X]$ for a DRV?", "answer": "$E[X] = \\sum_i x_i \\cdot P(X = x_i)$.", "difficulty": "easy"},
+    {"question": "What is $E[X]$ for a CRV?", "answer": "$E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f_X(x) \\, dx$.", "difficulty": "easy"},
+    {"question": "What is $E[aX + b]$?", "answer": "$E[aX + b] = a \\cdot E[X] + b$.", "difficulty": "easy"},
+    {"question": "What is variance?", "answer": "$\\sigma_x^2 = E[(X - \\mu_x)^2] = E[X^2] - (E[X])^2$.", "difficulty": "medium"},
+    {"question": "If $Y = aX + b$, what is $\\sigma_Y^2$?", "answer": "$\\sigma_Y^2 = a^2 \\cdot \\sigma_X^2$.", "difficulty": "medium"},
+    {"question": "What is the total power of a random variable?", "answer": "Total power $= E[X^2] = \\sigma_x^2 + \\mu_x^2$.", "difficulty": "hard"},
+    {"question": "What is Joint CDF?", "answer": "$F_{XY}(x, y) = P(X \\le x, Y \\le y)$.", "difficulty": "medium"},
+    {"question": "How do you get marginal PDF from joint PDF?", "answer": "$f_X(x) = \\int_{-\\infty}^{\\infty} f_{XY}(x, y) \\, dy$.", "difficulty": "medium"},
+    {"question": "What is the condition for independence of X and Y?", "answer": "$F_{XY}(x, y) = F_X(x) \\cdot F_Y(y)$ or $f_{XY}(x, y) = f_X(x) \\cdot f_Y(y)$.", "difficulty": "medium"},
+    {"question": "What is covariance?", "answer": "$\\text{Cov}(X, Y) = E[XY] - E[X]E[Y]$.", "difficulty": "medium"},
+    {"question": "What is the correlation coefficient?", "answer": "$\\rho_{xy} = \\frac{\\text{Cov}(X, Y)}{\\sigma_X \\sigma_Y}$, ranging from $-1$ to $1$.", "difficulty": "medium"},
+    {"question": "What does uncorrelated mean?", "answer": "$\\text{Cov}(X, Y) = 0$, i.e., $E[XY] = E[X]E[Y]$.", "difficulty": "medium"},
+    {"question": "What does orthogonal mean for random variables?", "answer": "$E[XY] = 0$.", "difficulty": "medium"},
+    {"question": "What is the Q-function?", "answer": "$Q(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_z^{\\infty} e^{-t^2/2} \\, dt$. Used for Gaussian tail probabilities.", "difficulty": "medium"},
+    {"question": "If $X \\sim N(\\mu, \\sigma^2)$, what is $P(X > a)$?", "answer": "$P(X > a) = Q\\left(\\frac{a - \\mu}{\\sigma}\\right)$.", "difficulty": "medium"},
+    {"question": "What is the PDF of $U[a, b]$?", "answer": "$f_X(x) = \\frac{1}{b-a}$ for $a \\le x \\le b$, $0$ otherwise.", "difficulty": "easy"},
+    {"question": "What are the mean and variance of $U[a, b]$?", "answer": "$\\mu = \\frac{a+b}{2}$, $\\sigma^2 = \\frac{(b-a)^2}{12}$.", "difficulty": "medium"},
+    {"question": "What is the PDF of standard normal?", "answer": "$f_X(x) = \\frac{1}{\\sqrt{2\\pi}} e^{-x^2/2}$ for $-\\infty < x < \\infty$.", "difficulty": "medium"},
+    {"question": "If $f_X(x) = f_X(-x)$ (even PDF), what is $E[X]$?", "answer": "$E[X] = 0$ because $x \\cdot f_X(x)$ is an odd function.", "difficulty": "medium"},
+    {"question": "What is the PDF of $Y = g(X)$ for monotonic $g$?", "answer": "$f_Y(y) = \\left. \\frac{f_X(x)}{|dy/dx|} \\right|_{x = g^{-1}(y)}$.", "difficulty": "hard"},
+    {"question": "Sum of independent Gaussians?", "answer": "If $X \\sim N(\\mu_1, \\sigma_1^2)$ and $Y \\sim N(\\mu_2, \\sigma_2^2)$ are independent, then $X+Y \\sim N(\\mu_1+\\mu_2, \\sigma_1^2+\\sigma_2^2)$.", "difficulty": "medium"},
+    {"question": "What is a Mixed Random Variable?", "answer": "A random variable with both discrete and continuous parts, e.g., $x \\in \\{1, 2\\} + [3, 6]$.", "difficulty": "medium"}
+  ],
+  "mcqs": [
+    {
+      "question": "When two fair coins are tossed, what is $P(\\text{exactly 1 head})$?",
+      "options": ["$\\frac{1}{4}$", "$\\frac{1}{2}$", "$\\frac{3}{4}$", "$1$"],
+      "correct_answer": "$\\frac{1}{2}$",
+      "explanation": "Sample space: $\\{HH, HT, TH, TT\\}$. $P(X=1) = P(HT) + P(TH) = \\frac{1}{4} + \\frac{1}{4} = \\frac{1}{2}$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "For a CRV, $P(X = a)$ is:",
+      "options": ["$1$", "Depends on $a$", "$0$", "Cannot be determined"],
+      "correct_answer": "$0$",
+      "explanation": "For a continuous random variable, the probability at any single point is always $0$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Which is a valid property of CDF $F_X(x)$?",
+      "options": ["$F_X(\\infty) = 0$", "$F_X$ is decreasing", "$F_X(-\\infty) = 0$", "$F_X(x)$ can be negative"],
+      "correct_answer": "$F_X(-\\infty) = 0$",
+      "explanation": "Properties: $F_X(\\infty) = 1$, $F_X(-\\infty) = 0$, non-decreasing, bounded $[0,1]$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "If $X \\sim U[-1, 3]$, what is $\\text{Var}(X)$?",
+      "options": ["$1$", "$\\frac{4}{3}$", "$\\frac{16}{12}$", "$\\frac{3}{4}$"],
+      "correct_answer": "$\\frac{4}{3}$",
+      "explanation": "$\\text{Var}(X) = \\frac{(b-a)^2}{12} = \\frac{(3-(-1))^2}{12} = \\frac{16}{12} = \\frac{4}{3}$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $Y = -2X + 3$, $\\mu_X = 3$, $\\sigma_X^2 = 4$, what is $\\mu_Y$?",
+      "options": ["$-3$", "$3$", "$-6$", "$0$"],
+      "correct_answer": "$-3$",
+      "explanation": "$\\mu_Y = a\\mu_X + b = (-2)(3) + 3 = -6 + 3 = -3$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $X$ and $Y$ are independent, which is TRUE?",
+      "options": ["$E[XY] = E[X]E[Y]$", "$\\text{Cov}(X,Y) = 1$", "$f_{XY}(x,y) \\neq f_X(x)f_Y(y)$", "$X$ and $Y$ are always orthogonal"],
+      "correct_answer": "$E[XY] = E[X]E[Y]$",
+      "explanation": "Independence implies $E[XY] = E[X]E[Y]$ and $\\text{Cov}(X,Y) = 0$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If PDF $f_X(x)$ is even, what is $E[X]$?",
+      "options": ["$1$", "Cannot be determined", "$0$", "$\\infty$"],
+      "correct_answer": "$0$",
+      "explanation": "If $f_X(x)$ is even, $xf_X(x)$ is odd, so $\\int_{-\\infty}^{\\infty} x f_X(x) \\, dx = 0$.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "If $X \\sim N(2, 4)$, what is $P(X > 2)$?",
+      "options": ["$0$", "$1$", "$0.5$", "Cannot be determined"],
+      "correct_answer": "$0.5$",
+      "explanation": "For a normal distribution, mean $\\mu = 2$ divides the distribution in half. $P(X > 2) = 0.5$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "$X \\sim N(0,1)$. $P(X > 1.5)$ expressed using Q-function is:",
+      "options": ["$Q(1.5)$", "$1 - Q(1.5)$", "$Q(-1.5)$", "$2Q(1.5)$"],
+      "correct_answer": "$Q(1.5)$",
+      "explanation": "For standard normal, $P(X > a) = Q(a)$. So $P(X > 1.5) = Q(1.5)$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $X \\sim U[0,5]$ and $Y$ is a quantized version of $X$, $Y$ is a:",
+      "options": ["Continuous RV", "Discrete RV", "Mixed RV", "Uniform RV"],
+      "correct_answer": "Discrete RV",
+      "explanation": "Quantization maps continuous values to discrete levels, so $Y$ takes a finite set of values.",
+      "difficulty": "medium"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "**Random Variables:** \n1. Maps sample points to real numbers.\n2. Types: DRV (countable), CRV (uncountable), Mixed.\n3. PMF: $p_X(x) = P(X=x)$ for DRV. PDF: $f_X(x) \\ge 0$, $\\int f = 1$ for CRV.\n4. CDF: $F_X(x) = P(X \\le x)$, non-decreasing $0 \\to 1$.\n5. $P(a < X \\le b) = F_X(b) - F_X(a)$.\n6. $P(X=a) = 0$ for CRV.\n7. Conditional: $P(A|B) = P(A \\cap B)/P(B)$.\n8. Expectation: $E[X] = \\sum xp(x)$ or $\\int xf(x)dx$.\n9. Variance: $\\sigma^2 = E[X^2] - (E[X])^2$.\n10. $Y = aX+b$: $\\mu_Y = a\\mu_X + b$, $\\sigma_Y^2 = a^2\\sigma_X^2$."
+    },
+    {
+      "summary_type": "formula_sheet",
+      "content": "**Key Formulas:**\n- $E[aX + b] = aE[X] + b$\n- $\\sigma_X^2 = E[X^2] - (E[X])^2$\n- $Y = aX+b$: $\\mu_Y = a\\mu_X + b$, $\\sigma_Y^2 = a^2\\sigma_X^2$\n- $\\text{Cov}(X,Y) = E[XY] - E[X]E[Y]$\n- $\\rho = \\frac{\\text{Cov}(X,Y)}{\\sigma_X \\sigma_Y}$\n- Uniform $U[a,b]$: $\\mu = \\frac{a+b}{2}$, $\\sigma^2 = \\frac{(b-a)^2}{12}$\n- Gaussian: $f(x) = \\frac{1}{\\sqrt{2\\pi\\sigma^2}} e^{-(x-\\mu)^2/(2\\sigma^2)}$\n- $Q(z) = \\frac{1}{\\sqrt{2\\pi}} \\int_z^\\infty e^{-t^2/2} dt$\n- $X \\sim N(\\mu,\\sigma^2)$: $P(X > a) = Q\\left(\\frac{a-\\mu}{\\sigma}\\right)$"
+    },
+    {
+      "summary_type": "revision_notes",
+      "content": "**Quick Revision:**\n- RV: function $S \\to \\mathbb{R}$\n- DRV: countable values; CRV: continuous interval\n- PMF: $P(X=x)$ for DRV; PDF: $f(x)$, area $=1$, for CRV\n- CDF: $F(x) = P(X \\le x)$, non-decreasing, $0\\to1$\n- $P(a < X \\le b) = F(b) - F(a) = \\int_a^b f(x)dx$\n- $E[X] = \\sum xp(x)$ (DRV) or $\\int xf(x)dx$ (CRV)\n- $\\text{Var}(X) = E[X^2] - (E[X])^2$\n- $Y = aX+b$: $E[Y] = aE[X]+b$, $\\text{Var}(Y) = a^2\\text{Var}(X)$\n- $\\text{Cov}(X,Y) = E[XY] - E[X]E[Y]$\n- Independent $\\Rightarrow$ uncorrelated; converse not always true\n- Key distributions: **Uniform**, **Gaussian**"
+    }
+  ]
+}

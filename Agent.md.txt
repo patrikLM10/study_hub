@@ -1,0 +1,19 @@
+GATE_ECE/
+├── AGENTS.md
+├── Subjects/
+│   ├── Engineering Mathematics/
+│   ├── Networks/
+│   ├── Signals and Systems/
+│   ├── Analog Electronics/
+│   ├── Digital Electronics/
+│   ├── Control Systems/
+│   ├── Communication/
+│   ├── Electromagnetics/
+│   ├── DSP/
+│   ├── Microprocessors/
+│   └── VLSI/
+├── PYQs/
+├── Formula Sheets/
+├── Mistake Log.md
+├── Progress Tracker.md
+└── Daily Revision/

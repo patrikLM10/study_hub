@@ -1,0 +1,50 @@
+{
+  "note_title": "Random Variable - Practice Problems",
+  "note_slug": "random-variable-practice-problems",
+  "folder_path": "Subjects/Communication/",
+  "tags": ["random-variable", "practice-problems", "gate-ece", "communication"],
+  "content": "Practice problems on Random Variables covering CDF calculations, joint distributions, expectation, variance, transformations, and standard distributions.",
+  "flashcards": [
+    {"question": "Two coins tossed. X = number of heads. What values can X take?", "answer": "X ∈ {0, 1, 2}", "difficulty": "easy"},
+    {"question": "What is the formula for P(x = a) in terms of CDF?", "answer": "P(x = a) = F(a) - F(a⁻) = F(a⁺) - F(a⁻)", "difficulty": "medium"},
+    {"question": "What is the PDF of a triangular distribution?", "answer": "A piecewise linear function that increases from 0 at start to a peak, then decreases to 0 at the end.", "difficulty": "hard"},
+    {"question": "How do you find the PDF of Y = g(X) for a non-monotonic function?", "answer": "Sum over all x that map to the same y: f_Y(y) = Σ f_X(x_i) / |g'(x_i)|", "difficulty": "hard"},
+    {"question": "What is the Central Limit Theorem?", "answer": "Sum of a large number of i.i.d. random variables approaches a Gaussian distribution regardless of the original distribution.", "difficulty": "medium"}
+  ],
+  "mcqs": [
+    {
+      "question": "For a random variable X with PDF f_X(x) = (1/2)|x|e^{-|x|}, -∞ < x < ∞, what is E[X]?",
+      "options": ["1", "0", "2", "Cannot be determined"],
+      "correct_answer": "0",
+      "explanation": "The PDF is even (symmetric). x·f_X(x) is odd, so the integral from -∞ to ∞ is 0.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If X ~ U[0, 5] and Y is a quantized version of X, which of the following best describes Y?",
+      "options": ["Continuous RV", "Discrete RV", "Mixed RV", "Uniform RV"],
+      "correct_answer": "Discrete RV",
+      "explanation": "Quantization maps continuous values to discrete levels, so Y takes only a finite set of values.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "X and Y are independent CRV with P(X > t) = 0.3 and P(Y > t) = 0.4. What is P(max(X,Y) > t)?",
+      "options": ["0.12", "0.58", "0.7", "0.88"],
+      "correct_answer": "0.58",
+      "explanation": "P(max > t) = 1 - P(max ≤ t) = 1 - P(X ≤ t)·P(Y ≤ t) = 1 - (0.7)(0.6) = 1 - 0.42 = 0.58.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "X ~ U[-2, 2], Y ~ U[-3, 3], independent. What is the distribution of X + Y?",
+      "options": ["Uniform", "Gaussian", "Triangular", "Exponential"],
+      "correct_answer": "Triangular",
+      "explanation": "Sum of two independent uniform distributions results in a triangular (convolution) distribution.",
+      "difficulty": "hard"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "Practice problems cover: (1) Basic probability calculations with coins and dice. (2) CDF-based probability computations using F(x) and F(x⁻). (3) Joint distributions: PMF tables, joint PDF integration. (4) Conditional probability and Bayes theorem. (5) Expectation, variance, and moments. (6) Covariance, correlation, orthogonality. (7) Standard distributions: Uniform, Gaussian. (8) Transformation of random variables. (9) Order statistics (max/min). (10) Central Limit Theorem applications."
+    }
+  ]
+}

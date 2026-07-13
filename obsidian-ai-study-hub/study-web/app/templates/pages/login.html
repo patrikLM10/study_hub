@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% block title %}Sign In - {{ app_name }}{% endblock %}
+{% block content %}
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('loginPage', () => ({
+            email: '',
+            password: '',
+            error: '',
+            loading: false,
+            async login() {
+                if (!supabase) return;
+                this.loading = true;
+                this.error = '';
+                const { error } = await supabase.auth.signInWithPassword({ email: this.email, password: this.password });
+                if (error) this.error = error.message;
+                else window.location.href = '/';
+                this.loading = false;
+            },
+            async loginGoogle() {
+                if (!supabase) return;
+                await supabase.auth.signInWithOAuth({ provider: 'google' });
+            }
+        }));
+    });
+</script>
+<div class="max-w-sm mx-auto mt-12" x-data="loginPage()">
+    <div class="card">
+        <h2 class="text-xl font-bold text-white mb-6 text-center">Sign In</h2>
+        <template x-if="error">
+            <p class="text-red-400 text-sm mb-4" x-text="error"></p>
+        </template>
+        <div class="space-y-4">
+            <input type="email" x-model="email" placeholder="Email" class="w-full bg-surface-800 border border-surface-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-accent-500">
+            <input type="password" x-model="password" placeholder="Password" class="w-full bg-surface-800 border border-surface-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-accent-500">
+            <button @click="login" :disabled="loading" class="btn btn-primary w-full justify-center">Sign In</button>
+            <div class="relative my-4"><div class="absolute inset-0 flex items-center"><div class="w-full border-t border-surface-700"></div></div><div class="relative flex justify-center text-xs"><span class="bg-surface-800 px-2 text-slate-500">or</span></div></div>
+            <button @click="loginGoogle" class="btn btn-secondary w-full justify-center">Continue with Google</button>
+            <p class="text-center text-sm text-slate-500">Don't have an account? <a href="/signup" class="text-accent-400 hover:text-accent-300">Sign up</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

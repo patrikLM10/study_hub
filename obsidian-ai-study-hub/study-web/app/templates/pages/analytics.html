@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% block title %}Analytics - {{ app_name }}{% endblock %}
+{% block content %}
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('analyticsPage', () => ({
+            stats: { notes: 0, flashcards: 0, mcqs: 0, quizAttempts: 0, avgScore: 0 },
+            loading: true,
+            async init() {
+                this.pageTitle = 'Analytics';
+                if (!supabase) { this.loading = false; return; }
+                const [notes, flashcards, mcqs, attempts] = await Promise.all([
+                    supabase.from('notes').select('id', { count: 'exact', head: true }),
+                    supabase.from('flashcards').select('id', { count: 'exact', head: true }),
+                    supabase.from('mcqs').select('id', { count: 'exact', head: true }),
+                    supabase.from('quiz_attempts').select('score, total'),
+                ]);
+                const a = attempts.data || [];
+                const avg = a.length > 0 ? a.reduce((s, r) => s + (r.score / r.total * 100), 0) / a.length : 0;
+                this.stats = {
+                    notes: notes.count || 0,
+                    flashcards: flashcards.count || 0,
+                    mcqs: mcqs.count || 0,
+                    quizAttempts: a.length,
+                    avgScore: Math.round(avg),
+                };
+                this.loading = false;
+            }
+        }));
+    });
+</script>
+<div x-data="analyticsPage()" x-init="init()">
+    <h2 class="text-xl font-semibold text-white mb-6">Study Analytics</h2>
+    <template x-if="loading"><p class="text-slate-400">Loading...</p></template>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+        <div class="card text-center"><p class="text-2xl font-bold text-white" x-text="stats.notes">0</p><p class="text-xs text-slate-400 mt-1">Notes</p></div>
+        <div class="card text-center"><p class="text-2xl font-bold text-white" x-text="stats.flashcards">0</p><p class="text-xs text-slate-400 mt-1">Flashcards</p></div>
+        <div class="card text-center"><p class="text-2xl font-bold text-white" x-text="stats.mcqs">0</p><p class="text-xs text-slate-400 mt-1">MCQs</p></div>
+        <div class="card text-center"><p class="text-2xl font-bold text-white" x-text="stats.quizAttempts">0</p><p class="text-xs text-slate-400 mt-1">Quiz Attempts</p></div>
+        <div class="card text-center"><p class="text-2xl font-bold text-white" x-text="stats.avgScore + '%'">0%</p><p class="text-xs text-slate-400 mt-1">Avg Score</p></div>
+    </div>
+</div>
+{% endblock %}
