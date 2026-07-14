@@ -9,15 +9,16 @@
             async init() {
                 this.pageTitle = 'Settings';
                 if (!supabase) { this.loading = false; return; }
-                const user = Alpine.$data(document.getElementById('app-shell') || document.body).user;
+                var user = Alpine.$data(document.getElementById('app-shell') || document.body).user;
                 if (user) {
-                    const { data } = await supabase.from('settings').select('*').eq('user_id', user.id).single();
-                    if (data) this.settings = data;
+                    var result = await supabase.from('settings').select('*').eq('user_id', user.id).single();
+                    if (result.data) this.settings = result.data;
                 }
                 this.loading = false;
             },
             async save() {
                 if (!supabase) return;
+                var user = Alpine.$data(document.getElementById('app-shell') || document.body).user;
                 if (user) {
                     await supabase.from('settings').upsert({ user_id: user.id, ...this.settings });
                 }

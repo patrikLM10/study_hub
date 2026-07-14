@@ -123,10 +123,11 @@ def _build_msq_row(note_id: str, item: dict) -> dict:
 
 
 def _build_nat_row(note_id: str, item: dict) -> dict:
+    val = item.get("answer", item.get("correct_answer"))
     return {
         "note_id": note_id,
         "question": item["question"],
-        "answer": float(item["correct_answer"]),
+        "answer": float(val),
         "unit": item.get("unit"),
         "explanation": item.get("explanation", ""),
         "difficulty": item.get("difficulty", "medium"),

@@ -10,13 +10,13 @@ DECLARE
     'notes', 'flashcards', 'mcqs', 'msqs', 'nat_questions',
     'summaries', 'mindmaps', 'revision_notes', 'formula_sheets',
     'cheat_sheets', 'interview_questions', 'viva_questions',
-    'quizzes', 'quiz_attempts', 'settings'
+    'quizzes', 'quiz_attempts', 'settings',
+    'study_sessions', 'embeddings', 'bookmarks'
   ];
 BEGIN
   FOREACH tbl IN ARRAY tables
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY;', tbl);
-    -- All tables are anon-readable (the website reads everything via anon key)
     EXECUTE format(
       'DROP POLICY IF EXISTS anon_read ON %I;', tbl
     );
@@ -39,6 +39,3 @@ CREATE POLICY anon_upsert_settings ON settings
 -- Note: UPDATE is intentionally not granted to anon for settings.
 -- If the frontend starts using update instead of upsert, add:
 --   FOR UPDATE USING (user_id = auth.uid());
-
--- study_sessions, embeddings, bookmarks: read-only for anon (supabase-py push
--- uses service_role key which bypasses RLS entirely).

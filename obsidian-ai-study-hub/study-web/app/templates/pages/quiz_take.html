@@ -19,6 +19,7 @@
                     this.quiz = data;
                     this.answers = new Array(data && data.questions ? data.questions.length : 0).fill(null);
                     this.loading = false;
+                    this._startedAt = new Date().toISOString();
                     Alpine.nextTick(function () { renderMath(); });
                 },
                 get questions() { return this.quiz && this.quiz.questions || []; },
@@ -38,17 +39,6 @@
                 },
                 prev() {
                     if (this.current > 0) this.current--;
-                    Alpine.nextTick(function () { renderMath(); });
-                },
-                init() {
-                    this.pageTitle = 'Quiz';
-                    if (!supabase) { this.loading = false; return; }
-                    var result = await supabase.from('quizzes').select('*').eq('id', '{{ quiz_id }}').single();
-                    var data = result.data;
-                    this.quiz = data;
-                    this.answers = new Array(data && data.questions ? data.questions.length : 0).fill(null);
-                    this.loading = false;
-                    this._startedAt = new Date().toISOString();
                     Alpine.nextTick(function () { renderMath(); });
                 },
                 submit() {

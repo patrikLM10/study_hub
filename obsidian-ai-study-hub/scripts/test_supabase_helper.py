@@ -19,7 +19,7 @@ demo = {
     "flashcards": [{"question": "q", "answer": "a"}],
     "mcqs": [{"question": "q", "options": ["a","b"], "correct_answer": "a"}],
     "msqs": [{"question": "q", "options": ["a","b"], "correct_answers": ["a"]}],
-    "nat_questions": [{"question": "q", "correct_answer": "42"}],
+    "nat_questions": [{"question": "q", "answer": "42"}],
     "summaries": [{"summary_type": "k", "content": "c"}],
     "revision_notes": [{"revision_type": "quick", "content": "c"}],
     "formula_sheets": [{"content": "c"}],
