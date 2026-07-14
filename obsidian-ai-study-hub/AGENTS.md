@@ -71,7 +71,7 @@ Copy `.env.example` to `.env` and set:
 
 ## Database
 
-The project uses the schema from `supabase_migration.sql`. Run it in Supabase SQL Editor before using the app.
+The project uses the schema from `supabase_setup.sql` (single combined migration + RLS script). Run it in Supabase SQL Editor before using the app. It is idempotent — safe to re-run anytime.
 
 ## Study Web
 
