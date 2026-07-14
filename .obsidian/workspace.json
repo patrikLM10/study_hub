@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/00_SESSION_CONTEXT.md",
+                "file": "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/Control_Systems_Question_Bank.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "00_SESSION_CONTEXT"
+              "title": "Control_Systems_Question_Bank"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 274.5
   },
   "right": {
     "id": "9c60753a69fe5490",
@@ -219,8 +219,14 @@
   },
   "active": "e7b85682c029c259",
   "lastOpenFiles": [
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/GATE_HOTS_30_MCQ.md",
+    "obsidian-ai-study-hub/cs_question_bank_full.json",
+    "obsidian-ai-study-hub/rp_practice_full.json",
+    "obsidian-ai-study-hub/rv_practice_full.json",
+    "obsidian-ai-study-hub/rv_mind_map.json",
+    "Subjects/Communication/Random.md",
+    "Subjects/Communication/Random Process - Practice Problems.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/00_SESSION_CONTEXT.md",
+    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/GATE_HOTS_30_MCQ.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/Control_Systems_Question_Bank.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/Control_Systems_Mind_Map.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/markdown.md",
@@ -253,18 +259,12 @@
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-86/markdown.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-85/markdown.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-84/markdown.md",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-83/markdown.md",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-82/markdown.md",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-81/markdown.md",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-99",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-96",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-98",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-97",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-95",
     "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-94",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-93",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-92",
-    "Subjects/ocr-playground-download-20260711T223246Z/merged_output.pdf/pages/page-91",
     "Untitled.canvas"
   ]
 }

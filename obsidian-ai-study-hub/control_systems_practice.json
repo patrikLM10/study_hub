@@ -1,0 +1,87 @@
+{
+  "note_title": "Control Systems - Practice Question Bank",
+  "note_slug": "control-systems-practice-question-bank",
+  "folder_path": "Subjects/ocr-playground-download/",
+  "tags": ["control-systems", "practice-problems", "nyquist", "gate-ece", "stability"],
+  "content": "Practice Question Bank with ~60 solved problems on Control Systems covering Polar Plots, Conformal Mapping, Nyquist Plots, Stability Analysis, Gain Margin, and Phase Margin.\n\n## Topics Covered\n- Polar Plot Sketching (Q1-Q4)\n- Conformal Mapping & Encirclement (Q1-Q10)\n- Nyquist Plot Drawing (Q1-Q13)\n- Stability Analysis (Q1-Q10)\n- Gain Margin Calculations (Q1-Q9)\n- Phase Margin & Combined GM/PM (Q1-Q17)",
+  "flashcards": [
+    {"question": "For G(s) = 1/[s²(s+1)(2s+1)], what are tail and head angles?", "answer": "Type=2, P-Z=4. ∠tail = -180°, ∠head = -360°.", "difficulty": "easy"},
+    {"question": "How to find ωpc for G(s) = 1/[s(1+sT₁)(1+sT₂)]?", "answer": "Set ∠GH = -180°. Solving gives ωpc = 1/√(T₁T₂).", "difficulty": "medium"},
+    {"question": "What is the magnitude at ωpc for G(s) = 1/[s(1+sT₁)(1+sT₂)]?", "answer": "M = T₁T₂/(T₁+T₂)", "difficulty": "hard"},
+    {"question": "For G(s) = (1-s)/(1+s), how many CW encirclements of origin?", "answer": "One zero in RHP (Z=1), no poles in RHP. N=P-Z = -1 → 1 CW encirclement.", "difficulty": "hard"},
+    {"question": "What is GM formula for G(s) = K/[s(1+sT₁)(1+sT₂)]?", "answer": "GM = (T₁+T₂)/(K T₁T₂)", "difficulty": "hard"}
+  ],
+  "mcqs": [
+    {
+      "question": "For $G(s) = \\frac{5(s+3)}{s(s-1)}$, the phase crossover frequency is:",
+      "options": ["1 rad/s", "√3 rad/s", "2 rad/s", "3 rad/s"],
+      "correct_answer": "√3 rad/s",
+      "explanation": "Solving φ = -180°: tan⁻¹(ω/3) + tan⁻¹(ω) - 270° = -180° → ω² = 3 → ω = √3.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For $G(s) = \\frac{K}{s(s^2+2s+2)}$, the number of zero-radius ACW semicircles is:",
+      "options": ["1", "2", "3", "0"],
+      "correct_answer": "3",
+      "explanation": "P-Z = 3-0 = 3. Number of zero-radius ACW semicircles = P-Z = 3.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{1}{s(s-2)}$, Nyquist plot encircles (-1,0):",
+      "options": ["Never", "Once CW", "Twice CCW", "Once CCW"],
+      "correct_answer": "Once CW",
+      "explanation": "P=1, CE: s²-2s+1=(s-1)² → Z=2. N=P-Z=-1. One CW encirclement.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "$G(s) = \\frac{10(s+3)}{s(s+1)(s+2)}$. The gain margin is:",
+      "options": ["0 dB", "6 dB", "∞ dB", "20 dB"],
+      "correct_answer": "∞ dB",
+      "explanation": "Routh shows no K₁ for marginal stability. Polar plot never reaches -180°. Always stable → GM=∞.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{1}{(s+1)(s+2)}$, the GM is:",
+      "options": ["0 dB", "6 dB", "∞ dB", "20 dB"],
+      "correct_answer": "∞ dB",
+      "explanation": "Type-0/Order-2, always stable. ωpc=0 on +ve real axis. Polar plot never intersects -ve real axis. GM=∞.",
+      "difficulty": "medium"
+    }
+  ],
+  "nat_questions": [
+    {
+      "question": "For $G(s)H(s) = \\frac{e^{-0.1s}}{s}$, calculate ωpc in rad/s.",
+      "correct_answer": "15.71",
+      "tolerance": 0.5,
+      "explanation": "φ = -0.1ω - π/2 = -π → 0.1ω = π/2 → ω = 5π ≈ 15.71 rad/s.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For $G(s) = \\frac{5}{s(s+5)(s+15)}$, find GM in dB.",
+      "correct_answer": "29.54",
+      "tolerance": 0.5,
+      "explanation": "ωpc = √(5×15)=√75. M=5/(√75×10×√300)=5/1500=1/300. GM=20log300≈29.54 dB.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For $G(s) = \\frac{K}{s(s+5)}$ with PM=45°, find K.",
+      "correct_answer": "35.35",
+      "tolerance": 0.5,
+      "explanation": "ωgc=5 (from -90-tan⁻¹(ω/5) = -135°). K = ω√(25+ω²) = 5√50 = 25√2 ≈ 35.35.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For $G(s) = \\frac{K}{s(s+5)(s+15)}$, find ωpc in rad/s.",
+      "correct_answer": "8.66",
+      "tolerance": 0.5,
+      "explanation": "ωpc = √(5×15) = √75 ≈ 8.66 rad/s.",
+      "difficulty": "medium"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "**Practice Problems - Key Techniques:**\n1. ∠tail = -90°×type, ∠head = -90°×(P-Z)\n2. For type-1/order-3: ωpc = 1/√(T₁T₂), M = T₁T₂/(T₁+T₂)\n3. Rationalize when M→∞ at ω→0 for exact Re/Im location\n4. Routh table: find K for marginal stability → GM = K\n5. For non-min phase: draw polar plot conventionally (can't use ∠ formulas directly)\n6. Nyquist: PP + mirror image + ∞CW SC (type) + 0ACW SC (P-Z)\n7. Transport lag: solve φ equation for ωpc"
+    }
+  ]
+}

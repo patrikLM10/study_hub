@@ -1,0 +1,37 @@
+{
+  "note_title": "Signal Classification",
+  "note_slug": "signal-classification",
+  "folder_path": "Signals and Systems/",
+  "tags": ["signals", "gate-ece"],
+  "content": "## Signal Classification\n\nSignals can be classified into various categories:\n\n- **Continuous-time vs Discrete-time**\n- **Periodic vs Aperiodic**\n- **Even vs Odd**\n- **Energy vs Power**\n\n### Even and Odd Signals\n\nA signal $x(t)$ is **even** if $x(-t) = x(t)$.\nA signal $x(t)$ is **odd** if $x(-t) = -x(t)$.\n\nAny signal can be decomposed as:\n$$x(t) = x_e(t) + x_o(t)$$\n\nWhere:\n- $x_e(t) = \\frac{1}{2}[x(t) + x(-t)]$\n- $x_o(t) = \\frac{1}{2}[x(t) - x(-t)]$",
+  "flashcards": [
+    {
+      "question": "What is an even signal?",
+      "answer": "A signal where x(-t) = x(t)",
+      "difficulty": "easy",
+      "tags": ["basics"]
+    },
+    {
+      "question": "What is the decomposition formula for even and odd parts?",
+      "answer": "xe(t) = 1/2[x(t) + x(-t)], xo(t) = 1/2[x(t) - x(-t)]",
+      "difficulty": "medium",
+      "tags": ["formula"]
+    }
+  ],
+  "mcqs": [
+    {
+      "question": "Which of the following is an even signal?",
+      "options": ["sin(t)", "cos(t)", "tan(t)", "exp(t)"],
+      "correct_answer": "cos(t)",
+      "explanation": "cos(t) is even because cos(-t) = cos(t)",
+      "difficulty": "easy",
+      "topic": "classification"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "Signals classified by: continuity, periodicity, symmetry, energy. Even signals have x(-t)=x(t). Odd signals have x(-t)=-x(t)."
+    }
+  ]
+}

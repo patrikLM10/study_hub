@@ -1,0 +1,222 @@
+{
+  "note_title": "Control Systems - GATE HOTS 30 MCQs",
+  "note_slug": "control-systems-gate-hots-30-mcqs",
+  "folder_path": "Subjects/ocr-playground-download/",
+  "tags": ["control-systems", "gate-hots", "mcq", "nyquist", "stability"],
+  "content": "30 GATE-level Higher Order Thinking Skills (HOTS) Multiple Choice Questions on Control Systems covering Polar Plots, Conformal Mapping, Nyquist Stability Criterion, Gain Margin, and Phase Margin.\n\n## Topic-wise Breakdown\n- Polar Plots (Q1-Q6)\n- Conformal Mapping / Principle of Arguments (Q7-Q10)\n- Nyquist Stability Criterion (Q11-Q16)\n- Nyquist Plot Construction (Q17-Q21)\n- Gain Margin & Phase Margin (Q22-Q30)",
+  "flashcards": [
+    {"question": "What is the tail angle for a Type-2 system?", "answer": "∠tail = -90° × 2 = -180°", "difficulty": "easy"},
+    {"question": "What is the phase crossover frequency for a Type-1/Order-3 system?", "answer": "ωpc = 1/√(T₁T₂) (GM of corner frequencies)", "difficulty": "easy"},
+    {"question": "For Q(s) = (s+2)(s+3) with CW contour enclosing both zeros, how many origin encirclements?", "answer": "N = P-Z = 0-2 = -2. Two CW encirclements (same direction as contour).", "difficulty": "medium"},
+    {"question": "For a stable OL system, what does 1 CW encirclement of (-1,0) mean?", "answer": "P=0, N=-1 → Z=1 → 1 CL pole in RHP → CL system is unstable.", "difficulty": "hard"},
+    {"question": "What is the gain margin formula for a Type-1/Order-3 system G(s)=K/[s(1+sT₁)(1+sT₂)]?", "answer": "GM = (T₁+T₂)/(K T₁ T₂)", "difficulty": "hard"}
+  ],
+  "mcqs": [
+    {
+      "question": "The polar plot of $G(s)H(s) = \\frac{1}{s^2(1+sT_1)(1+sT_2)}$ for ω: 0→∞ will have its tail angle and head angle respectively as:",
+      "options": ["-180°, -360°", "-180°, -270°", "-90°, -360°", "-180°, -90°"],
+      "correct_answer": "-180°, -360°",
+      "explanation": "Type=2, P-Z=4 → ∠tail = -90×2 = -180°, ∠head = -90×4 = -360°.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "For $G(s) = \\frac{1}{s(1+sT_1)(1+sT_2)}$, the polar plot intersects the negative real axis at:",
+      "options": ["ω = 1/√(T₁T₂)", "ω = 1/(T₁T₂)", "ω = √(T₁T₂)", "ω = T₁+T₂"],
+      "correct_answer": "ω = 1/√(T₁T₂)",
+      "explanation": "Phase crossover frequency ωpc = 1/√(T₁T₂) = GM of corner frequencies.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "A type-0, order-2 all-pole system has a polar plot that approaches the origin at an angle of:",
+      "options": ["0°", "-90°", "-180°", "-270°"],
+      "correct_answer": "-180°",
+      "explanation": "P-Z = 2-0 = 2 → ∠head = -90°×2 = -180°.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "When a pole is added to $\\frac{1}{1+sT}$ at the origin, the polar plot undergoes which change?",
+      "options": ["Head rotates CW by 90°, tail unchanged", "Both head and tail rotate CW by 90°", "Head rotates CW by 180°, tail by 90°", "Both head and tail rotate ACW by 90°"],
+      "correct_answer": "Both head and tail rotate CW by 90°",
+      "explanation": "Adding a pole at origin rotates both head & tail CW by 90°. Pole away from origin rotates only head.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{1}{s(1+sT_1)(1+sT_2)}$, magnitude at phase crossover frequency is:",
+      "options": ["T₁T₂/(T₁+T₂)", "(T₁+T₂)/(T₁T₂)", "1/√(T₁T₂)", "(T₁-T₂)/(T₁+T₂)"],
+      "correct_answer": "T₁T₂/(T₁+T₂)",
+      "explanation": "At ωpc = 1/√(T₁T₂), M = T₁T₂/(T₁+T₂).",
+      "difficulty": "hard"
+    },
+    {
+      "question": "If a contour in s-plane encloses 4 poles and 1 zero of Q(s) (CW), the Q(s) plot encircles the origin:",
+      "options": ["3 times CW", "3 times ACW", "5 times ACW", "5 times CW"],
+      "correct_answer": "3 times ACW",
+      "explanation": "N = P-Z = 4-1 = 3. N>0 → opposite direction to contour → ACW.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Given Q(s) = (s+2)(s+3) and CW contour enclosing both zeros, origin encirclements:",
+      "options": ["2, CW", "2, ACW", "1, CW", "None"],
+      "correct_answer": "2, CW",
+      "explanation": "Z=2, P=0. N = P-Z = -2. N<0 → same direction as contour → CW.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If a contour in s-plane passes through a pole of Q(s), then:",
+      "options": ["Plot encircles origin once", "Plot is open curve, encirclement invalid", "Encirclements = number of poles", "Plot is a straight line"],
+      "correct_answer": "Plot is open curve, encirclement invalid",
+      "explanation": "Poles must NOT lie on the contour boundary. If they do, the Q(s) plot is an open curve and encirclement concept is invalid.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "The plot of 1+Q(s) encircles origin. This corresponds to Q(s) plot encircling:",
+      "options": ["(0,0)", "(1,0)", "(-1,0)", "(0,1)"],
+      "correct_answer": "(-1,0)",
+      "explanation": "Origin of 1+Q(s) plane: 1+Q(s)=0 → Q(s)=-1 → point (-1,0) in Q(s) plane.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "A ufb system with $G(s) = \\frac{1}{(s-1)(s+2)(s+3)}$. Nyquist contour CW. Encirclement of (-1,0):",
+      "options": ["Never", "Once CW", "Once ACW", "Twice ACW"],
+      "correct_answer": "Never",
+      "explanation": "P₊ = 1 (s=1). CE: (s-1)(s+2)(s+3)+1=0. Routh: 1 sign change → Z₊=1. N = P₊-Z₊ = 0.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Nyquist plot encircles (-1,0) twice CW. OL has no RHP poles. Number of CL poles in RHP:",
+      "options": ["0", "1", "2", "Cannot be determined"],
+      "correct_answer": "2",
+      "explanation": "N = -2, P=0. N = P-Z → -2 = -Z → Z = 2.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{K(s+1)}{(s-2)(s+3)}$ (CW Nyquist contour). For CL stability, ACW encirclements of (-1,0) required:",
+      "options": ["0", "1", "2", "Depends on K"],
+      "correct_answer": "1",
+      "explanation": "P₊=1 (s=2). For CL stable: Z₊=0. N = P₊-Z₊ = 1. N>0 → ACW. Need 1 ACW encirclement.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "A stable OL system has Nyquist plot encircling (-1,0) once CW. Which is TRUE?",
+      "options": ["CL is stable", "CL has one pole in RHP", "CL has one zero in RHP", "OL has one pole at origin"],
+      "correct_answer": "CL has one pole in RHP",
+      "explanation": "P=0, N=-1. N = P-Z → Z = 1. 1 CL pole in RHP → unstable.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "$G(s)H(s) = \\frac{1}{s^2 + a^2}$. Nyquist contour avoids poles on jω. Encirclements of (-1,0):",
+      "options": ["0", "1", "2", "Cannot be determined"],
+      "correct_answer": "0",
+      "explanation": "No RHP poles (poles on jω are avoided). P₊=0. System is stable → Z₊=0. N=0.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Which statement about Nyquist criterion is FALSE?",
+      "options": ["It applies to systems with transportation lag", "It requires knowledge of OL poles in RHP", "It gives both absolute and relative stability", "It cannot be applied to non-minimum phase systems"],
+      "correct_answer": "It cannot be applied to non-minimum phase systems",
+      "explanation": "Nyquist criterion APPLIES to ALL systems including non-minimum phase. That's its advantage over polar plot stability.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{1}{s^3}$, number of infinite-radius CW semicircles:",
+      "options": ["1", "2", "3", "0"],
+      "correct_answer": "3",
+      "explanation": "Type=3. Number of ∞-radius CW semicircles = type = 3.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Nyquist plot of $G(s)H(s) = \\frac{1-s}{1+s}$ has magnitude:",
+      "options": ["Varies with frequency", "Always 1", "Always less than 1", "Always greater than 1"],
+      "correct_answer": "Always 1",
+      "explanation": "M = |1-jω|/|1+jω| = 1. This is an all-pass system.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For min-phase system with P-Z=3, number of zero-radius ACW semicircles:",
+      "options": ["1", "2", "3", "4"],
+      "correct_answer": "3",
+      "explanation": "Number of 0-radius ACW semicircles = P-Z = 3.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "A Type-2 system's Nyquist plot has how many infinite-radius CW semicircles?",
+      "options": ["1", "2", "3", "Equal to RHP poles"],
+      "correct_answer": "2",
+      "explanation": "Number of ∞-radius CW semicircles = type = 2.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "For min-phase system with GM=6dB and PM=45°, relationship between ωpc and ωgc:",
+      "options": ["ωpc > ωgc", "ωpc = ωgc", "ωpc < ωgc", "Cannot be determined"],
+      "correct_answer": "ωpc > ωgc",
+      "explanation": "GM>0, PM>0 → ωpc > ωgc → stable.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "$G(s) = \\frac{K}{s(s+5)(s+15)}$. GM in dB is:",
+      "options": ["20log300", "20log75", "20log150", "20log100"],
+      "correct_answer": "20log300",
+      "explanation": "ωpc = √(5×15)=√75. M = 5/1500. GM=1/M=300. GM(dB)=20log300.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For $G(s)H(s) = \\frac{5}{(s+1)(2s+1)(3s+1)}$, fc=0.16 Hz. GM ≈ :",
+      "options": ["0 dB", "2 dB", "4 dB", "6 dB"],
+      "correct_answer": "6 dB",
+      "explanation": "At ωpc=2π×0.16=1.0053, M=0.4942. GM=20log(1/0.4942)≈6 dB.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Which system has infinite GM?",
+      "options": ["1/[s(s+1)]", "1/[(s+1)(s+2)]", "1/[s(s+1)(s+2)]", "1/[s²(s+1)]"],
+      "correct_answer": "1/[(s+1)(s+2)]",
+      "explanation": "Type-0/Order-2, always stable. Polar plot never reaches -180° at finite ω. GM=∞.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "System has PM = -30°. For min-phase, this indicates:",
+      "options": ["Stable", "Marginally stable", "Unstable", "PM cannot be negative"],
+      "correct_answer": "Unstable",
+      "explanation": "For min-phase: PM > 0 → stable, PM < 0 → unstable.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Ufb system with $G(s) = \\frac{K}{s(s+5)}$ has PM=45°. K = ?",
+      "options": ["25", "25√2", "5√2", "50"],
+      "correct_answer": "25√2",
+      "explanation": "PM=45°→φ=-135°. ωgc=5. K=5√50=25√2.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Addition of transportation lag e^(-sT) to OLTF:",
+      "options": ["Affects both ωgc and ωpc", "Affects ωpc but not ωgc", "Affects ωgc but not ωpc", "Affects neither"],
+      "correct_answer": "Affects ωpc but not ωgc",
+      "explanation": "e^(-sT) adds phase lag -ωT (affects phase → ωpc), but |e^(-jωT)|=1 (magnitude unchanged → ωgc unaffected).",
+      "difficulty": "medium"
+    },
+    {
+      "question": "For Type-II non-min phase (poles in RHP), stable when:",
+      "options": ["GM>1 and PM>0", "GM<1 and PM<0", "GM>1 and PM<0", "GM<1 and PM>0"],
+      "correct_answer": "GM<1 and PM<0",
+      "explanation": "Type-II: conditions are inverted. Stable ↔ GM<1, PM<0.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "$G(s)H(s) = \\frac{s}{(s+100)^3}$ has:",
+      "options": ["Finite GM, finite PM", "Infinite GM, finite PM", "Finite GM, infinite PM", "Infinite GM, infinite PM"],
+      "correct_answer": "Infinite GM, infinite PM",
+      "explanation": "ωpc→∞ (M→0), GM=∞. ωgc is imaginary → PM=∞.",
+      "difficulty": "hard"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "**HOTS MCQ Key Concepts:**\n1. Polar plot: ∠tail = -90°×type, ∠head = -90°×(P-Z)\n2. Phase crossover freq for Type-1/Order-3: ωpc = 1/√(T₁T₂)\n3. Conformal mapping: N = P-Z (encirclements of origin)\n4. NSC: N = P₊ - Z₊ (encirclements of -1,0), CL stable iff Z₊=0\n5. Nyquist: ∞-radius CW SC = type, 0-radius ACW SC = P-Z\n6. GM magnitude at ωpc: for Type-1/Order-3, M = T₁T₂/(T₁+T₂)\n7. Type-I stable: GM>1, PM>0. Type-II stable: GM<1, PM<0.\n8. Transport lag: phase only, magnitude unchanged"
+    },
+    {
+      "summary_type": "revision_notes",
+      "content": "**Quick Revision for Control Systems MCQs:**\n- ∠formulas: tail = -90×type, head = -90×(P-Z)\n- N = Pc - Zc (mapping), N = P₊ - Z₊ (NSC)\n- CL stable: Z₊ = 0 → N = P₊\n- ωpc = 1/√(T₁T₂) for 1/[s(1+sT₁)(1+sT₂)]\n- ∞-radius CW SC = type\n- 0-radius ACW SC = P-Z\n- GM(dB) = 20log(1/|GH(jωpc)|)\n- PM = 180° + ∠GH(jωgc)\n- Transport lag: affects ωpc, not ωgc\n- Type-II: opposite stability conditions"
+    }
+  ]
+}

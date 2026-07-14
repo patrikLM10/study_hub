@@ -1,9 +1,27 @@
-__pycache__/
-*.py[cod]
+# Next.js
+.next/
+out/
+
+# Environment
 .env
-.venv/
-venv/
-*.egg-info/
+.env.local
+.env*.local
+
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
 dist/
 build/
-.DS_Store
+*.tsbuildinfo
+
+# Archive
+_archive/

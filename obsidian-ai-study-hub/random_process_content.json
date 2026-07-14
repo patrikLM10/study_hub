@@ -1,0 +1,115 @@
+{
+  "note_title": "Random Process - Complete Guide",
+  "note_slug": "random-process-complete-guide",
+  "folder_path": "Subjects/Communication/",
+  "tags": ["random-process", "stochastic-process", "gate-ece", "communication"],
+  "content": "Comprehensive notes on Random Processes including statistical parameters, stationarity, ergodicity, autocorrelation, power spectral density, LTI systems, and noise.\n\n## Definition\nA **Random Process (RP)** or **Stochastic Process** is a collection of random variables changing with time: $\\{x_1(t), x_2(t), \\dots, x_\\infty(t)\\}$.\n\n- Sampling at a time instant $t_1$ yields a random variable $x(t_1)$.\n- Example: $x(t) = A \\cos(\\omega t + \\theta)$ with fixed $A,\\omega,\\theta$ is deterministic. With $A \\sim U[0,2], \\theta \\sim U[0,2\\pi]$ it is an RP.\n\n## Statistical Parameters\n\n- **Mean function:** $\\mu_x(t) = E[x(t)]$\n- **Mean Square Value (MSV):** $E[x^2(t)]$ = Total Power\n- **Variance:** $\\sigma_x^2(t) = E[x^2(t)] - (E[x(t)])^2$ = AC Power\n- **Total Power = AC Power + DC Power:** $E[x^2(t)] = \\sigma_x^2(t) + \\mu_x^2(t)$\n- **Autocorrelation (ACF):** $R_{xx}(t_1, t_2) = E[x(t_1) x(t_2)]$, $R_{xx}(t, t+\\tau) = E[x(t) x(t+\\tau)]$\n- **Covariance:** $C_{xx}(t, t+\\tau) = R_{xx}(t, t+\\tau) - \\mu_x(t)\\mu_x(t+\\tau)$\n- **Cross-correlation:** $R_{xy}(t_1, t_2) = E[x(t_1) y(t_2)]$\n\n## Wide Sense Stationary (WSSRP)\n\n**Conditions:**\n1. Mean is constant: $\\mu_x(t) = \\mu_x$\n2. ACF depends only on $\\tau$: $R_{xx}(t, t+\\tau) = R_x(\\tau)$\n\n**Properties:**\n- $R_x(0) = E[x^2(t)] = \\sigma_x^2 + \\mu_x^2$ (total power)\n- $R_x(0) \\ge |R_x(\\tau)|$ (maximum at origin)\n- $R_x(\\tau) = R_x(-\\tau)$ (even function)\n- $C_x(\\tau) = R_x(\\tau) - \\mu_x^2$\n- $C_x(0) = \\sigma_x^2$\n- If WSSRP + Periodic $\\Rightarrow$ $R_x(\\tau)$ is periodic\n- Cross-correlation: $R_{xy}(\\tau) = R_{yx}(-\\tau)$\n\n**Transformations preserving WSSRP:**\n- $y(t) = ax(t) + b$: $\\mu_y = a\\mu_x + b$, $\\sigma_y^2 = a^2\\sigma_x^2$\n- $y(t) = x(at+b)$: $\\mu_y = \\mu_x$, $\\sigma_y^2 = \\sigma_x^2$\n- $y(t) = ax(t) + bx(t-T_0)$: $\\mu_y = (a+b)\\mu_x$, $\\sigma_y^2 = (a^2+b^2)\\sigma_x^2 + 2ab\\,C_x(T_0)$\n\n## Ergodicity\n- Statistical averages = Time averages\n- $E[x(t)] = \\lim_{T \\to \\infty} \\frac{1}{T} \\int_T x(t) dt$\n- $R_x(\\tau) = \\lim_{T \\to \\infty} \\frac{1}{T} \\int_T x(t) x(t+\\tau) dt$\n- If ergodic $\\Rightarrow$ WSSRP (converse not always true)\n- For aperiodic ergodic RP: $\\lim_{\\tau \\to \\infty} R_x(\\tau) = \\mu_x^2$ (DC power)\n\n## Power Spectral Density (PSD)\n\n**Wiener-Khinchin Theorem:**\n$$S_x(\\omega) = \\int_{-\\infty}^{\\infty} R_x(\\tau) e^{-j\\omega\\tau} d\\tau \\quad \\Longleftrightarrow \\quad R_x(\\tau) = \\frac{1}{2\\pi} \\int_{-\\infty}^{\\infty} S_x(\\omega) e^{j\\omega\\tau} d\\omega$$\n\n**Properties:**\n- $S_x(f) \\ge 0$, $S_x(\\omega) \\ge 0$ (non-negative)\n- Even: $S_x(f) = S_x(-f)$, $S_x(\\omega) = S_x(-\\omega)$\n- Total Power $= \\int_{-\\infty}^{\\infty} S_x(f) df = \\frac{1}{2\\pi} \\int_{-\\infty}^{\\infty} S_x(\\omega) d\\omega$\n- DC Power $= \\mu_x^2 = \\int_{0^-}^{0^+} S_x(f) df$ (area under impulse at $f=0$)\n\n**LTI System Output:** $S_Y(f) = |H(f)|^2 S_X(f)$\n\n## RP through LTI Systems\n- $y(t) = x(t) * h(t)$\n- Mean: $\\mu_Y = \\mu_X \\cdot H(0)$\n- ACF: $R_Y(\\tau) = R_X(\\tau) * h(\\tau) * h(-\\tau)$\n- Cross-correlation: $R_{XY}(\\tau) = R_X(\\tau) * h(\\tau)$\n- PSD: $S_Y(f) = S_X(f) \\cdot |H(f)|^2$, $S_{XY}(f) = S_X(f) \\cdot H(f)$\n\n## White Noise\n- PSD: $S_x(f) = N_0/2$ (constant over all frequencies)\n- ACF: $R_x(\\tau) = (N_0/2)\\delta(\\tau)$\n- Output power with LTI: $\\frac{N_0}{2} \\int_{-\\infty}^{\\infty} |H(f)|^2 df$\n- Bandlimited white noise: $S_x(f) = N_0/2$ for $|f| \\le B$, $0$ otherwise\n- ACF of bandlimited white noise: $R_x(\\tau) = N_0 B\\, \\text{sinc}(2B\\tau)$\n\n## Hilbert Transform\n- LTI system: $h(t) = 1/(\\pi t)$, $H(\\omega) = -j\\,\\text{sgn}(\\omega)$\n- $|H(f)| = 1$, phase $= -90^\\circ$ (all-pass $90^\\circ$ phase shifter)\n- $\\cos(\\omega_0 t) \\xrightarrow{HT} \\sin(\\omega_0 t)$, $\\sin(\\omega_0 t) \\xrightarrow{HT} -\\cos(\\omega_0 t)$\n- Double HT: $\\hat{\\hat{x}}(t) = -x(t)$\n\n## Important Relations\n- $R_x(\\tau) \\xleftrightarrow{FT} S_x(\\omega)$\n- Total Power $= R_x(0) = \\int S_x(f) df$\n- DC Power $= \\mu_x^2 = \\lim_{\\tau\\to\\infty} R_x(\\tau)$ (for aperiodic ergodic)\n- Variance $= \\sigma_x^2 = C_x(0) = R_x(0) - \\mu_x^2$",
+  "flashcards": [
+    {"question": "What is a Random Process?", "answer": "A collection of random variables changing with time, also called a Stochastic Process. $\\{x_1(t), x_2(t), \\dots, x_\\infty(t)\\}$", "difficulty": "easy"},
+    {"question": "What is the mean function of an RP?", "answer": "$\\mu_x(t) = E[x(t)]$. It may be a function of time or a constant.", "difficulty": "easy"},
+    {"question": "What is the autocorrelation function (ACF)?", "answer": "$R_{xx}(t_1, t_2) = E[x(t_1) x(t_2)]$. Measures correlation of the RP with itself at different times.", "difficulty": "easy"},
+    {"question": "What are the two conditions for a WSSRP?", "answer": "1) Mean is constant: $\\mu_x(t) = \\mu_x$. 2) ACF depends only on $\\tau$: $R_{xx}(t, t+\\tau) = R_x(\\tau)$.", "difficulty": "medium"},
+    {"question": "What is $R_x(0)$ for a WSSRP?", "answer": "$R_x(0) = E[x^2(t)] = \\sigma_x^2 + \\mu_x^2$, which is the total power (MSV).", "difficulty": "medium"},
+    {"question": "What are the evenness properties of ACF and cross-correlation for WSSRP?", "answer": "$R_x(\\tau) = R_x(-\\tau)$ (even). $R_{xy}(\\tau) = R_{yx}(-\\tau)$.", "difficulty": "medium"},
+    {"question": "What is $R_x(0)$ compared to $|R_x(\\tau)|$?", "answer": "$R_x(0) \\ge |R_x(\\tau)|$ for all $\\tau$. The ACF is maximum at the origin.", "difficulty": "medium"},
+    {"question": "What is ergodicity?", "answer": "Statistical averages equal time averages: $E[x(t)] = \\lim_{T\\to\\infty} \\frac{1}{T} \\int_T x(t) dt$. Ergodic $\\Rightarrow$ WSSRP.", "difficulty": "medium"},
+    {"question": "For an aperiodic ergodic RP, what is $\\lim_{\\tau\\to\\infty} R_x(\\tau)$?", "answer": "$\\lim_{\\tau\\to\\infty} R_x(\\tau) = \\mu_x^2$, which is the DC power.", "difficulty": "hard"},
+    {"question": "What does the Wiener-Khinchin theorem state?", "answer": "For a WSSRP, PSD and ACF are Fourier transform pairs: $S_x(\\omega) = \\int R_x(\\tau) e^{-j\\omega\\tau} d\\tau$.", "difficulty": "medium"},
+    {"question": "What are the properties of PSD?", "answer": "$S_x(f) \\ge 0$ (non-negative), even function $S_x(f) = S_x(-f)$, total power $= \\int S_x(f) df$.", "difficulty": "medium"},
+    {"question": "If $y(t) = ax(t) + b$, what is the mean and variance of $y$?", "answer": "$\\mu_y = a\\mu_x + b$, $\\sigma_y^2 = a^2\\sigma_x^2$. WSSRP property is preserved.", "difficulty": "medium"},
+    {"question": "What is the PSD of white noise?", "answer": "$S_x(f) = N_0/2$, constant over all frequencies.", "difficulty": "easy"},
+    {"question": "What is the ACF of white noise?", "answer": "$R_x(\\tau) = (N_0/2) \\delta(\\tau)$, an impulse at $\\tau=0$.", "difficulty": "medium"},
+    {"question": "What is the PSD of LTI output?", "answer": "$S_Y(f) = |H(f)|^2 S_X(f)$.", "difficulty": "medium"},
+    {"question": "What is the Hilbert transform of $\\cos(\\omega_0 t)$?", "answer": "$\\cos(\\omega_0 t) \\xrightarrow{HT} \\sin(\\omega_0 t)$.", "difficulty": "medium"},
+    {"question": "What is the frequency response of the Hilbert transform?", "answer": "$H(\\omega) = -j\\,\\text{sgn}(\\omega)$. It is an all-pass $90^\\circ$ phase shifter with $|H(f)| = 1$.", "difficulty": "hard"},
+    {"question": "What is $R_Y(\\tau)$ when $x(t)$ passes through an LTI system $h(t)$?", "answer": "$R_Y(\\tau) = R_X(\\tau) * h(\\tau) * h(-\\tau)$.", "difficulty": "hard"},
+    {"question": "What is the covariance of a WSSRP?", "answer": "$C_x(\\tau) = R_x(\\tau) - \\mu_x^2$. At $\\tau=0$: $C_x(0) = \\sigma_x^2$.", "difficulty": "medium"},
+    {"question": "What is the ACF of an I.I.D. random process?", "answer": "$R_{xx}(k) = E[x_n^2]$ for $k=0$, and $R_{xx}(k) = (E[x_n])^2$ for $k \\neq 0$.", "difficulty": "hard"}
+  ],
+  "mcqs": [
+    {
+      "question": "Which of the following is a condition for WSSRP?",
+      "options": ["Mean is zero", "Mean is constant", "Mean is periodic", "Mean is a linear function of time"],
+      "correct_answer": "Mean is constant",
+      "explanation": "WSSRP requires: 1) $\\mu_x(t) = \\text{constant}$, 2) $R_{xx}(t, t+\\tau) = R_x(\\tau)$ only function of $\\tau$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "For a WSSRP, which of the following is true about $R_x(\\tau)$?",
+      "options": ["$R_x(\\tau)$ is an odd function", "$R_x(\\tau) = R_x(-\\tau)$", "$R_x(\\tau) \\le R_x(0)/2$", "$R_x(\\tau)$ is always positive"],
+      "correct_answer": "$R_x(\\tau) = R_x(-\\tau)$",
+      "explanation": "ACF of WSSRP is an even function: $R_x(\\tau) = R_x(-\\tau)$. Also $R_x(0) \\ge |R_x(\\tau)|$.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "If an RP is ergodic, it is necessarily:",
+      "options": ["SSSRP", "WSSRP", "Gaussian", "Zero-mean"],
+      "correct_answer": "WSSRP",
+      "explanation": "Ergodic $\\Rightarrow$ WSSRP. But WSSRP does not necessarily imply ergodicity.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "The Wiener-Khinchin theorem relates:",
+      "options": ["Mean and variance", "PDF and CDF", "PSD and ACF", "Cross-correlation and covariance"],
+      "correct_answer": "PSD and ACF",
+      "explanation": "$S_x(\\omega) = \\int R_x(\\tau) e^{-j\\omega\\tau} d\\tau$ and $R_x(\\tau) = \\frac{1}{2\\pi} \\int S_x(\\omega) e^{j\\omega\\tau} d\\omega$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "What is the PSD of white noise?",
+      "options": ["$N_0/2$", "$N_0 \\delta(f)$", "$N_0$", "$N_0/2 \\delta(f)$"],
+      "correct_answer": "$N_0/2$",
+      "explanation": "White noise has constant PSD $S_x(f) = N_0/2$ over all frequencies.",
+      "difficulty": "easy"
+    },
+    {
+      "question": "For an aperiodic ergodic RP, $\\lim_{\\tau\\to\\infty} R_x(\\tau)$ equals:",
+      "options": ["$0$", "$\\sigma_x^2$", "$\\mu_x^2$", "$\\infty$"],
+      "correct_answer": "$\\mu_x^2$",
+      "explanation": "For aperiodic ergodic RP: $\\lim_{\\tau\\to\\infty} R_x(\\tau) = \\mu_x^2$, which is the DC power.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "If $y(t) = x(t) * h(t)$ and $x(t)$ is WSSRP, what is $S_Y(f)$?",
+      "options": ["$S_X(f) \\cdot H(f)$", "$S_X(f) \\cdot |H(f)|^2$", "$S_X(f) + |H(f)|^2$", "$S_X(f) * |H(f)|^2$"],
+      "correct_answer": "$S_X(f) \\cdot |H(f)|^2$",
+      "explanation": "For an LTI system, $S_Y(f) = |H(f)|^2 S_X(f)$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "The Hilbert transform frequency response is:",
+      "options": ["$H(\\omega) = j\\,\\text{sgn}(\\omega)$", "$H(\\omega) = -j\\,\\text{sgn}(\\omega)$", "$H(\\omega) = \\text{sgn}(\\omega)$", "$H(\\omega) = 1/(j\\omega)$"],
+      "correct_answer": "$H(\\omega) = -j\\,\\text{sgn}(\\omega)$",
+      "explanation": "$h(t) = 1/(\\pi t)$, $H(\\omega) = -j\\,\\text{sgn}(\\omega)$. All-pass $90^\\circ$ phase shifter.",
+      "difficulty": "hard"
+    },
+    {
+      "question": "For a WSSRP, $C_x(0)$ equals:",
+      "options": ["$R_x(0)$", "$\\mu_x^2$", "$\\sigma_x^2$", "$0$"],
+      "correct_answer": "$\\sigma_x^2$",
+      "explanation": "$C_x(\\tau) = R_x(\\tau) - \\mu_x^2$. At $\\tau=0$: $C_x(0) = R_x(0) - \\mu_x^2 = \\sigma_x^2$.",
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $y(t) = ax(t) + bx(t-T_0)$ with $x(t)$ WSSRP, what is $\\mu_y$?",
+      "options": ["$a\\mu_x$", "$b\\mu_x$", "$(a+b)\\mu_x$", "$ab\\mu_x$"],
+      "correct_answer": "$(a+b)\\mu_x$",
+      "explanation": "For linear operations on WSSRP: $\\mu_y = E[ax(t) + bx(t-T_0)] = a\\mu_x + b\\mu_x = (a+b)\\mu_x$.",
+      "difficulty": "hard"
+    }
+  ],
+  "summaries": [
+    {
+      "summary_type": "key_points",
+      "content": "**Random Process Key Points:**\n1. RP = collection of RVs changing with time.\n2. Statistical params: mean $\\mu_x(t)$, MSV $E[x^2(t)]$, variance $\\sigma_x^2(t)$, ACF $R_x(t_1,t_2)$, cross-correlation $R_{xy}$.\n3. WSSRP: constant mean, ACF depends only on $\\tau$. $R_x(0) = \\sigma_x^2 + \\mu_x^2$.\n4. $R_x(\\tau) = R_x(-\\tau)$ (even), $R_x(0) \\ge |R_x(\\tau)|$.\n5. Ergodic: time avg = statistical avg. Ergodic $\\Rightarrow$ WSSRP.\n6. Wiener-Khinchin: $S_x(\\omega) \\leftrightarrow R_x(\\tau)$ via FT.\n7. PSD: $S_x(f) \\ge 0$, even, total power $= \\int S_x(f) df$.\n8. LTI output: $S_Y(f) = |H(f)|^2 S_X(f)$.\n9. White noise: $S_x(f) = N_0/2$, $R_x(\\tau) = (N_0/2)\\delta(\\tau)$.\n10. Hilbert: $H(\\omega) = -j\\,\\text{sgn}(\\omega)$, $90^\\circ$ phase shifter."
+    },
+    {
+      "summary_type": "revision_notes",
+      "content": "**Random Process Quick Revision:**\n- RP: $\\{x(t)\\}$ collection of RVs over time\n- Mean: $\\mu_x(t) = E[x(t)]$\n- ACF: $R_{xx}(t_1,t_2) = E[x(t_1)x(t_2)]$\n- WSSRP: constant mean, $R_x(\\tau)$ only\n- $R_x(0) = E[x^2] = \\sigma_x^2 + \\mu_x^2$ (total power)\n- $R_x(\\tau) = R_x(-\\tau)$, $R_x(0) \\ge |R_x(\\tau)|$\n- $C_x(\\tau) = R_x(\\tau) - \\mu_x^2$, $C_x(0) = \\sigma_x^2$\n- Ergodic: $\\langle x(t) \\rangle = E[x(t)]$\n- Wiener-Khinchin: $S_x(f) = \\mathcal{F}\\{R_x(\\tau)\\}$\n- White noise: $S_x(f) = N_0/2$\n- LTI: $S_Y(f) = |H(f)|^2 S_X(f)$\n- Hilbert: $\\hat{x}(t) = x(t) * 1/(\\pi t)$, $H(f) = -j\\,\\text{sgn}(f)$"
+    },
+    {
+      "summary_type": "formula_sheet",
+      "content": "**RP Formulas:**\n- $\\mu_x(t) = E[x(t)]$\n- $R_{xx}(t_1,t_2) = E[x(t_1)x(t_2)]$\n- $C_{xx} = R_{xx} - \\mu_x\\mu_{x'}$\n- WSSRP: $\\mu_x$ constant, $R_x(\\tau)$ only\n- $R_x(0) = \\sigma_x^2 + \\mu_x^2$, $R_x(\\tau) = R_x(-\\tau)$\n- $R_x(\\tau) \\xleftrightarrow{FT} S_x(\\omega)$\n- $S_Y(f) = |H(f)|^2 S_X(f)$\n- White noise: $S(f) = N_0/2$, $R(\\tau) = (N_0/2)\\delta(\\tau)$\n- $y(t) = ax(t)+b$: $\\mu_y = a\\mu_x+b$, $\\sigma_y^2 = a^2\\sigma_x^2$\n- HT: $H(\\omega) = -j\\,\\text{sgn}(\\omega)$"
+    }
+  ]
+}

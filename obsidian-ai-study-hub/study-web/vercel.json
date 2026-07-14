@@ -1,9 +1,0 @@
-{
-    "buildCommand": "pip install -r requirements.txt",
-    "outputDirectory": ".",
-    "framework": "fastapi",
-    "routes": [
-        { "src": "/static/(.*)", "dest": "/static/$1" },
-        { "src": "/(.*)", "dest": "/$1" }
-    ]
-}
