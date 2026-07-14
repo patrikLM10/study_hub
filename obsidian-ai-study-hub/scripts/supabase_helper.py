@@ -10,6 +10,7 @@ import os
 import sys
 import argparse
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Optional
 
 try:
@@ -18,8 +19,23 @@ except ImportError:
     print("supabase-py not installed. Run: pip install supabase")
     sys.exit(1)
 
+# Try loading .env from multiple locations
+_dotenv_paths = [
+    Path(__file__).parent / ".env",
+    Path(__file__).parent.parent / ".env",
+    Path(__file__).parent.parent / "study-web" / ".env",
+]
+for _dp in _dotenv_paths:
+    if _dp.exists():
+        for _line in _dp.read_text().splitlines():
+            _line = _line.strip()
+            if _line and not _line.startswith("#") and "=" in _line:
+                _k, _v = _line.split("=", 1)
+                os.environ.setdefault(_k.strip(), _v.strip())
+        break
+
 SUPABASE_URL = os.getenv("SUPABASE_URL", "")
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
+SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY") or os.getenv("SUPABASE_ANON_KEY", "")
 
 sb: Optional[Client] = None
 
@@ -27,10 +43,10 @@ sb: Optional[Client] = None
 def get_sb() -> Client:
     global sb
     if sb is None:
-        if not SUPABASE_URL or not SUPABASE_SERVICE_KEY:
-            print("Error: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in .env")
+        if not SUPABASE_URL or not SUPABASE_KEY:
+            print("Error: SUPABASE_URL and one of SUPABASE_SERVICE_ROLE_KEY or SUPABASE_ANON_KEY must be set in .env")
             sys.exit(1)
-        sb = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+        sb = create_client(SUPABASE_URL, SUPABASE_KEY)
     return sb
 
 
@@ -59,59 +75,154 @@ def upsert_note(note_data: dict) -> str:
         return result.data[0]["id"] if result.data else None
 
 
-def upsert_flashcards(note_id: str, flashcards: list):
-    if not flashcards:
-        return
-    client = get_sb()
-    client.table("flashcards").delete().eq("note_id", note_id).execute()
-    for fc in flashcards:
-        client.table("flashcards").insert({
-            "note_id": note_id,
-            "question": fc["question"],
-            "answer": fc["answer"],
-            "difficulty": fc.get("difficulty", "medium"),
-            "topic": fc.get("topic"),
-            "subtopic": fc.get("subtopic"),
-            "source_heading": fc.get("source_heading"),
-            "tags": fc.get("tags", []),
-        }).execute()
+# ---- Table-driven content upsert ----
+# Each entry maps a JSON key in the input file to a DB table and a row-builder function.
+# This replaces 9 near-identical per-type upsert functions.
+_CONTENT_TABLES = {}
 
 
-def upsert_mcqs(note_id: str, mcqs: list):
-    if not mcqs:
-        return
-    client = get_sb()
-    client.table("mcqs").delete().eq("note_id", note_id).execute()
-    for mcq in mcqs:
-        client.table("mcqs").insert({
-            "note_id": note_id,
-            "question": mcq["question"],
-            "options": mcq["options"],
-            "correct_answer": mcq["correct_answer"],
-            "explanation": mcq.get("explanation", ""),
-            "difficulty": mcq.get("difficulty", "medium"),
-            "topic": mcq.get("topic"),
-        }).execute()
+def _register(table: str, json_key: str, row_fn):
+    _CONTENT_TABLES[json_key] = (table, row_fn)
 
 
-def upsert_summaries(note_id: str, summaries: list):
-    if not summaries:
-        return
-    client = get_sb()
-    client.table("summaries").delete().eq("note_id", note_id).execute()
-    for s in summaries:
-        client.table("summaries").insert({
-            "note_id": note_id,
-            "summary_type": s["summary_type"],
-            "content": s["content"],
-        }).execute()
+def _build_flashcard_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "answer": item["answer"],
+        "difficulty": item.get("difficulty", "medium"),
+        "topic": item.get("topic"),
+        "subtopic": item.get("subtopic"),
+        "source_heading": item.get("source_heading"),
+        "tags": item.get("tags", []),
+    }
+
+
+def _build_mcq_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "options": item["options"],
+        "correct_answer": item["correct_answer"],
+        "explanation": item.get("explanation", ""),
+        "difficulty": item.get("difficulty", "medium"),
+        "topic": item.get("topic"),
+    }
+
+
+def _build_msq_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "options": item["options"],
+        "correct_answers": item["correct_answers"],
+        "explanation": item.get("explanation", ""),
+        "difficulty": item.get("difficulty", "medium"),
+        "topic": item.get("topic"),
+    }
+
+
+def _build_nat_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "answer": float(item["correct_answer"]),
+        "unit": item.get("unit"),
+        "explanation": item.get("explanation", ""),
+        "difficulty": item.get("difficulty", "medium"),
+        "topic": item.get("topic"),
+    }
+
+
+def _build_summary_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "summary_type": item["summary_type"],
+        "content": item["content"],
+    }
+
+
+def _build_revision_note_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "revision_type": item.get("revision_type", "quick"),
+        "content": item["content"],
+    }
+
+
+def _build_formula_sheet_row(note_id: str, item: dict) -> dict:
+    return {"note_id": note_id, "content": item["content"]}
+
+
+def _build_cheat_sheet_row(note_id: str, item: dict) -> dict:
+    return {"note_id": note_id, "content": item["content"]}
+
+
+def _build_interview_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "answer": item["answer"],
+        "difficulty": item.get("difficulty", "medium"),
+        "category": item.get("category"),
+    }
+
+
+def _build_viva_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "question": item["question"],
+        "answer": item["answer"],
+        "difficulty": item.get("difficulty", "medium"),
+    }
+
+
+def _build_mindmap_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "content": item.get("content", ""),
+        "mermaid_syntax": item["mermaid_syntax"],
+    }
+
+
+def _build_quiz_row(note_id: str, item: dict) -> dict:
+    return {
+        "note_id": note_id,
+        "title": item["title"],
+        "description": item.get("description"),
+        "quiz_type": item.get("quiz_type", "practice"),
+        "questions": item["questions"],
+        "time_limit": item.get("time_limit"),
+    }
+
+
+_register("flashcards", "flashcards", _build_flashcard_row)
+_register("mcqs", "mcqs", _build_mcq_row)
+_register("msqs", "msqs", _build_msq_row)
+_register("nat_questions", "nat_questions", _build_nat_row)
+_register("summaries", "summaries", _build_summary_row)
+_register("revision_notes", "revision_notes", _build_revision_note_row)
+_register("formula_sheets", "formula_sheets", _build_formula_sheet_row)
+_register("cheat_sheets", "cheat_sheets", _build_cheat_sheet_row)
+_register("interview_questions", "interview_questions", _build_interview_row)
+_register("viva_questions", "viva_questions", _build_viva_row)
+_register("mindmaps", "mindmaps", _build_mindmap_row)
+_register("quizzes", "quizzes", _build_quiz_row)
 
 
 def upsert_content(note_data: dict):
     note_id = upsert_note(note_data)
-    upsert_flashcards(note_id, note_data.get("flashcards", []))
-    upsert_mcqs(note_id, note_data.get("mcqs", []))
-    upsert_summaries(note_id, note_data.get("summaries", []))
+    client = get_sb()
+    for json_key, (table, row_fn) in _CONTENT_TABLES.items():
+        items = note_data.get(json_key, [])
+        if not items:
+            continue
+        client.table(table).delete().eq("note_id", note_id).execute()
+        rows = [row_fn(note_id, item) for item in items]
+        # Insert in batches of 50 to stay well under Supabase's 100-row limit
+        for i in range(0, len(rows), 50):
+            batch = rows[i : i + 50]
+            client.table(table).insert(batch).execute()
     print(f"Synced note '{note_data.get('title', '')}' (id={note_id})")
 
 
@@ -125,10 +236,10 @@ def push_json_file(filepath: str):
             "content": data.get("content", ""),
             "tags": data.get("tags", []),
             "file_path": data.get("folder_path", ""),
-            "flashcards": data.get("flashcards", []),
-            "mcqs": data.get("mcqs", []),
-            "summaries": data.get("summaries", []),
         }
+        # Pull every known content key from the JSON
+        for json_key in _CONTENT_TABLES:
+            note_data[json_key] = data.get(json_key, [])
         upsert_content(note_data)
     elif isinstance(data, list):
         for item in data:
@@ -138,10 +249,9 @@ def push_json_file(filepath: str):
                 "content": item.get("content", ""),
                 "tags": item.get("tags", []),
                 "file_path": item.get("folder_path", ""),
-                "flashcards": item.get("flashcards", []),
-                "mcqs": item.get("mcqs", []),
-                "summaries": item.get("summaries", []),
             }
+            for json_key in _CONTENT_TABLES:
+                note_data[json_key] = item.get(json_key, [])
             upsert_content(note_data)
 
 

@@ -180,3 +180,13 @@ CREATE TABLE bookmarks (
     created_at TIMESTAMPTZ DEFAULT now(),
     UNIQUE(note_id)
 );
+
+CREATE TABLE settings (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL,
+    daily_goal INT DEFAULT 20,
+    theme TEXT DEFAULT 'dark',
+    created_at TIMESTAMPTZ DEFAULT now(),
+    updated_at TIMESTAMPTZ DEFAULT now(),
+    UNIQUE(user_id)
+);

@@ -40,6 +40,17 @@
                     if (this.current > 0) this.current--;
                     Alpine.nextTick(function () { renderMath(); });
                 },
+                init() {
+                    this.pageTitle = 'Quiz';
+                    if (!supabase) { this.loading = false; return; }
+                    var result = await supabase.from('quizzes').select('*').eq('id', '{{ quiz_id }}').single();
+                    var data = result.data;
+                    this.quiz = data;
+                    this.answers = new Array(data && data.questions ? data.questions.length : 0).fill(null);
+                    this.loading = false;
+                    this._startedAt = new Date().toISOString();
+                    Alpine.nextTick(function () { renderMath(); });
+                },
                 submit() {
                     var s = 0;
                     this.questions.forEach(function (q, i) {
@@ -48,13 +59,14 @@
                     this.score = s;
                     this.submitted = true;
                     if (supabase && this.quiz) {
+                        var completed = new Date().toISOString();
                         supabase.from('quiz_attempts').insert({
                             quiz_id: this.quiz.id,
                             score: s,
                             total: this.questions.length,
                             answers: this.answers,
-                            started_at: new Date().toISOString(),
-                            completed_at: new Date().toISOString(),
+                            started_at: this._startedAt,
+                            completed_at: completed,
                         }).then(function () {});
                     }
                     Alpine.nextTick(function () { renderMath(); });
